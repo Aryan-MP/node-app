@@ -58,29 +58,27 @@ app.get('/', (req, res) => {
 });
 
 // Handle user signup
+// Handle user signup
 app.post('/signup', async (req, res) => {
   const { username, email, password } = req.body;
-  logger.info(`User signup requested with username: ${username}`);
 
   try {
+    // Check if user already exists
+    const existingUser = await getUserByUsername(username);
+    if (existingUser) {
+      return res.status(400).send('User already exists');
+    }
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Save the user to DynamoDB
-    const params = {
-      TableName: 'my-dynamodb-table', // Ensure this matches your DynamoDB table name
-      Item: {
-        'username': { S: username },
-      },
-    };
-    await dynamoDB.putItem(params).promise();
-
-    logger.info('User registered successfully');
+    await createUser({ username, email, password: hashedPassword });
 
     // Redirect to the home page
     res.redirect('/');
   } catch (error) {
-    logger.error(`Error registering user: ${error.message}`, error);
+    console.error(error);
     res.status(500).send('Error registering user');
   }
 });
