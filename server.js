@@ -71,8 +71,6 @@ app.post('/signup', async (req, res) => {
       TableName: 'my-dynamodb-table', // Ensure this matches your DynamoDB table name
       Item: {
         'username': { S: username },
-        'email': { S: email },
-        'password': { S: hashedPassword },
       },
     };
     await dynamoDB.putItem(params).promise();
