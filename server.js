@@ -9,7 +9,7 @@ const morgan = require('morgan');
 const axios = require('axios');
 
 const app = express();
-const port = 6969;
+const port = 6968;
 
 // Configure AWS SDK
 AWS.config.update({
