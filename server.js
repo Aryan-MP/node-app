@@ -13,9 +13,9 @@ const port = 6968;
 
 // Configure AWS SDK
 AWS.config.update({
-  region: process.env.AWS_REGION || 'us-east-1', 
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID, 
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, 
+  region:'ap-south-1', 
+  accessKeyId:'AKIA2UC27KD2FVLNAZNP', 
+  secretAccessKey:'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', 
 });
 
 // Create DynamoDB instance
@@ -29,7 +29,7 @@ const logger = winston.createLogger({
     new winston.transports.File({ filename: 'combined.log' }),
     new winston.transports.Console(),
     new LokiTransport({
-      host: 'http://172.25.7.155:3100', // URL of your Loki server
+      host: 'http://13.126.209.52:3100', // URL of your Loki server
       labels: { job: 'express-app' },
       json: true,
       interval: 1, // send logs every 1 second
