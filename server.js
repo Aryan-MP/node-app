@@ -14,8 +14,8 @@ const port = 6968;
 // Configure AWS SDK
 AWS.config.update({
   region:'ap-south-1', 
-  accessKeyId:'AKIA2UC27KD2FVLNAZNP', 
-  secretAccessKey:'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', 
+  accessKeyId:'', 
+  secretAccessKey:'', 
 });
 
 // Create DynamoDB instance
